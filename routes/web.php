@@ -63,6 +63,6 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
 });
 
 Route::get('/make-admin', function () {
-    \App\Models\User::where('email', 'your@email.com')->update(['role' => 'admin']);
+    \App\Models\User::where('email', 'admin@hireboad.com')->update(['role' => 'admin']);
     return 'Done';
 });
