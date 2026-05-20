@@ -61,8 +61,3 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::get('/applications',                        [AdminController::class, 'applications'])->name('applications');
     Route::delete('/applications/{application}',       [AdminController::class, 'deleteApplication'])->name('applications.delete');
 });
-
-Route::get('/make-admin', function () {
-    \App\Models\User::where('email', 'admin@hireboad.com')->update(['role' => 'admin']);
-    return 'Done';
-});
