@@ -4,11 +4,16 @@ use App\Http\Controllers\JobListingController;
 use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AdminRegisterController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 // Public
 Route::get('/', [JobListingController::class, 'browse'])->name('home');
+
+// Admin Secret Register
+Route::get('/admin-setup/register', [AdminRegisterController::class, 'showForm'])->name('admin.register.form');
+Route::post('/admin-setup/register', [AdminRegisterController::class, 'register'])->name('admin.register');
 
 require __DIR__.'/auth.php';
 
