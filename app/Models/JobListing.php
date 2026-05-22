@@ -1,154 +1,32 @@
 <?php
+namespace App\Models;
 
-namespace App\Http\Controllers;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-use App\Models\Feedback;
-use App\Models\JobListing;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+class JobListing extends Model {
+    use HasFactory;
 
-class JobListingController extends Controller
-{
-    use AuthorizesRequests;
+    protected $fillable = [
+        'user_id', 'title', 'company', 'location', 'type',
+        'description', 'requirements', 'salary_min', 'salary_max',
+        'deadline', 'status'
+    ];
 
-    // Public homepage — all open jobs
-    public function browse(Request $request)
-    {
-        $jobs = JobListing::open()
-            ->when($request->search,   fn($q) => $q->search($request->search))
-            ->when($request->type,     fn($q) => $q->where('type', $request->type))
-            ->when($request->location, fn($q) => $q->where('location', 'like', "%{$request->location}%"))
-            ->latest()
-            ->paginate(10)
-            ->withQueryString();
+    protected $casts = ['deadline' => 'date'];
 
-        return view('jobs.index', compact('jobs'));
+    public function employer() { return $this->belongsTo(User::class, 'user_id'); }
+    public function applications() { return $this->hasMany(Application::class); }
+
+    public function scopeOpen($query) {
+        return $query->where('status', 'open')->where('deadline', '>=', now());
     }
 
-    // Companies page
-    public function companies()
-    {
-        $companies = JobListing::selectRaw('company, COUNT(*) as jobs_count')
-            ->groupBy('company')
-            ->orderByDesc('jobs_count')
-            ->get();
-
-        return view('companies', compact('companies'));
-    }
-
-    // Employer dashboard — only their own jobs
-    public function index(Request $request)
-    {
-        $query = JobListing::where('user_id', Auth::id())
-            ->withCount('applications')
-            ->latest();
-
-        if ($request->status && $request->status !== 'all') {
-            $query->where('status', $request->status);
-        }
-
-        $jobs = $query->paginate(5)->withQueryString();
-
-        return view('employer.dashboard', compact('jobs'));
-    }
-
-    // View applicants for a specific job
-    public function applications(JobListing $jobListing)
-    {
-        $this->authorize('update', $jobListing);
-
-        $applications = $jobListing->applications()
-            ->with('applicant')
-            ->latest()
-            ->paginate(10);
-
-        return view('employer.applications', compact('jobListing', 'applications'));
-    }
-
-    // Single job page
-    public function show(JobListing $jobListing)
-    {
-        $hasApplied = auth()->check()
-            ? $jobListing->applications()->where('user_id', auth()->id())->exists()
-            : false;
-
-        $existingFeedback = auth()->check()
-            ? Feedback::where('user_id', auth()->id())
-                ->where('job_listing_id', $jobListing->id)
-                ->first()
-            : null;
-
-        return view('jobs.show', compact('jobListing', 'hasApplied', 'existingFeedback'));
-    }
-
-    // Show create form
-    public function create()
-    {
-        return view('jobs.create');
-    }
-
-    // Store new job
-    public function store(Request $request)
-    {
-        $data = $request->validate([
-            'title'        => 'required|string|max:255',
-            'company'      => 'required|string|max:255',
-            'location'     => 'required|string|max:255',
-            'type'         => 'required|in:full-time,part-time,contract,internship',
-            'description'  => 'required|string',
-            'requirements' => 'required|string',
-            'salary_min'   => 'nullable|numeric|min:0',
-            'salary_max'   => 'nullable|numeric|min:0',
-            'deadline'     => 'required|date|after:today',
-        ]);
-
-        auth()->user()->jobListings()->create($data);
-
-        return redirect()->route('employer.dashboard')
-            ->with('success', 'Job posted successfully!');
-    }
-
-    // Show edit form
-    public function edit(JobListing $jobListing)
-    {
-        $this->authorize('update', $jobListing);
-
-        return view('jobs.edit', compact('jobListing'));
-    }
-
-    // Update job
-    public function update(Request $request, JobListing $jobListing)
-    {
-        $this->authorize('update', $jobListing);
-
-        $data = $request->validate([
-            'title'        => 'required|string|max:255',
-            'company'      => 'required|string|max:255',
-            'location'     => 'required|string|max:255',
-            'type'         => 'required|in:full-time,part-time,contract,internship',
-            'description'  => 'required|string',
-            'requirements' => 'required|string',
-            'salary_min'   => 'nullable|numeric|min:0',
-            'salary_max'   => 'nullable|numeric|min:0',
-            'deadline'     => 'required|date',
-            'status'       => 'required|in:open,closed',
-        ]);
-
-        $jobListing->update($data);
-
-        return redirect()->route('employer.dashboard')
-            ->with('success', 'Job updated!');
-    }
-
-    // Delete job
-    public function destroy(JobListing $jobListing)
-    {
-        $this->authorize('delete', $jobListing);
-
-        $jobListing->delete();
-
-        return redirect()->route('employer.dashboard')
-            ->with('success', 'Job deleted.');
+    public function scopeSearch($query, $term) {
+        return $query->where(function($q) use ($term) {
+            $q->where('title', 'like', "%{$term}%")
+              ->orWhere('company', 'like', "%{$term}%")
+              ->orWhere('location', 'like', "%{$term}%");
+        });
     }
 }
