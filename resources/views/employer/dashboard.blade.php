@@ -11,13 +11,7 @@
   .topbar h1 { font-family:'DM Serif Display',serif; font-size:28px; font-weight:400; letter-spacing:-0.5px; line-height:1; color:#1A1916; }
   .topbar h1 em { font-style:italic; color:#6B6A66; }
   .topbar .sub { font-size:13px; color:#A09E99; margin-top:5px; }
-  .btn-post {
-    display:inline-flex; align-items:center; gap:7px;
-    background:#1A1916; color:#fff; border:none;
-    padding:10px 20px; border-radius:8px;
-    font-family:'DM Sans',sans-serif; font-size:13px; font-weight:500;
-    text-decoration:none; white-space:nowrap; transition:opacity 0.15s;
-  }
+  .btn-post { display:inline-flex; align-items:center; gap:7px; background:#1A1916; color:#fff; border:none; padding:10px 20px; border-radius:8px; font-family:'DM Sans',sans-serif; font-size:13px; font-weight:500; text-decoration:none; white-space:nowrap; transition:opacity 0.15s; }
   .btn-post:hover { opacity:0.82; color:#fff; }
 
   .stats-row { display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:10px; margin-bottom:2rem; }
@@ -29,25 +23,12 @@
   .section-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:12px; }
   .section-label { font-size:10.5px; font-weight:500; text-transform:uppercase; letter-spacing:0.09em; color:#A09E99; }
   .filter-row { display:flex; gap:6px; }
-  .filter-btn {
-    font-size:12px; font-family:'DM Sans',sans-serif;
-    padding:4px 12px; border-radius:20px;
-    border:0.5px solid rgba(26,25,22,0.12);
-    background:transparent; color:#6B6A66;
-    text-decoration:none; transition:background 0.12s,color 0.12s;
-  }
+  .filter-btn { font-size:12px; font-family:'DM Sans',sans-serif; padding:4px 12px; border-radius:20px; border:0.5px solid rgba(26,25,22,0.12); background:transparent; color:#6B6A66; text-decoration:none; transition:background 0.12s,color 0.12s; }
   .filter-btn:hover,.filter-btn.active { background:#1A1916; color:#fff; border-color:#1A1916; }
 
   .job-list { display:flex; flex-direction:column; gap:8px; }
 
-  .job-card {
-    background:#fff; border:0.5px solid rgba(26,25,22,0.10);
-    border-radius:14px; padding:18px 20px;
-    display:grid; grid-template-columns:1fr auto;
-    gap:10px 20px; align-items:start;
-    box-shadow:0 1px 3px rgba(26,25,22,0.05);
-    transition:border-color 0.15s,box-shadow 0.15s;
-  }
+  .job-card { background:#fff; border:0.5px solid rgba(26,25,22,0.10); border-radius:14px; padding:18px 20px; display:grid; grid-template-columns:1fr auto; gap:10px 20px; align-items:start; box-shadow:0 1px 3px rgba(26,25,22,0.05); transition:border-color 0.15s,box-shadow 0.15s; }
   .job-card:hover { border-color:rgba(26,25,22,0.20); box-shadow:0 2px 8px rgba(26,25,22,0.09); }
   .job-card.closed { opacity:0.55; }
 
@@ -74,49 +55,24 @@
   .apps-bar { height:100%; background:#1A1916; border-radius:2px; }
 
   .job-actions { display:flex; flex-direction:column; align-items:flex-end; gap:6px; }
-  .btn-applicants {
-    font-size:12px; font-weight:500; font-family:'DM Sans',sans-serif;
-    padding:7px 14px; border-radius:8px; cursor:pointer;
-    background:#1A1916; color:#fff; border:none;
-    text-decoration:none; white-space:nowrap; transition:opacity 0.15s;
-    display:inline-flex; align-items:center; gap:5px;
-  }
+  .btn-applicants { font-size:12px; font-weight:500; font-family:'DM Sans',sans-serif; padding:7px 14px; border-radius:8px; cursor:pointer; background:#1A1916; color:#fff; border:none; text-decoration:none; white-space:nowrap; transition:opacity 0.15s; display:inline-flex; align-items:center; gap:5px; }
   .btn-applicants:hover { opacity:0.82; color:#fff; }
-  .btn-edit {
-    font-size:12px; font-weight:500; font-family:'DM Sans',sans-serif;
-    padding:7px 14px; border-radius:8px; cursor:pointer;
-    border:0.5px solid rgba(26,25,22,0.18); background:transparent;
-    color:#6B6A66; text-decoration:none; transition:background 0.12s,color 0.12s;
-  }
+  .btn-edit { font-size:12px; font-weight:500; font-family:'DM Sans',sans-serif; padding:7px 14px; border-radius:8px; cursor:pointer; border:0.5px solid rgba(26,25,22,0.18); background:transparent; color:#6B6A66; text-decoration:none; transition:background 0.12s,color 0.12s; }
   .btn-edit:hover { background:#F5F4F0; color:#1A1916; }
-  .btn-delete {
-    font-size:12px; font-family:'DM Sans',sans-serif;
-    padding:5px 10px; border-radius:8px; cursor:pointer;
-    border:none; background:transparent; color:#C4C2BC;
-    transition:background 0.12s,color 0.12s;
-  }
+  .btn-feedback { font-size:12px; font-weight:500; font-family:'DM Sans',sans-serif; padding:7px 14px; border-radius:8px; cursor:pointer; border:0.5px solid rgba(26,25,22,0.18); background:transparent; color:#6B6A66; text-decoration:none; transition:background 0.12s,color 0.12s; display:inline-flex; align-items:center; gap:5px; }
+  .btn-feedback:hover { background:#F5F4F0; color:#1A1916; }
+  .btn-delete { font-size:12px; font-family:'DM Sans',sans-serif; padding:5px 10px; border-radius:8px; cursor:pointer; border:none; background:transparent; color:#C4C2BC; transition:background 0.12s,color 0.12s; }
   .btn-delete:hover { background:#FCEBEB; color:#A32D2D; }
 
   .alert-success { background:#EAF3DE; color:#3B6D11; border-radius:10px; padding:11px 16px; font-size:13px; margin-bottom:20px; }
 
-  .empty-card {
-    background:#fff; border:0.5px dashed rgba(26,25,22,0.15);
-    border-radius:14px; padding:4rem 1rem; text-align:center;
-  }
+  .empty-card { background:#fff; border:0.5px dashed rgba(26,25,22,0.15); border-radius:14px; padding:4rem 1rem; text-align:center; }
   .empty-card h3 { font-family:'DM Serif Display',serif; font-size:20px; font-weight:400; color:#1A1916; margin-bottom:6px; }
   .empty-card p { font-size:13px; color:#A09E99; margin-bottom:16px; }
 
   .pagination-wrap { margin-top:1.75rem; display:flex; justify-content:center; }
   .pagination-wrap nav { display:flex; gap:5px; }
-  .pagination-wrap span,
-  .pagination-wrap a {
-    display:flex; align-items:center; justify-content:center;
-    width:32px; height:32px; border-radius:8px;
-    font-size:12.5px; font-family:'DM Sans',sans-serif;
-    border:0.5px solid rgba(26,25,22,0.12);
-    background:#fff; color:#6B6A66; text-decoration:none;
-    transition:background 0.12s;
-  }
+  .pagination-wrap span, .pagination-wrap a { display:flex; align-items:center; justify-content:center; width:32px; height:32px; border-radius:8px; font-size:12.5px; font-family:'DM Sans',sans-serif; border:0.5px solid rgba(26,25,22,0.12); background:#fff; color:#6B6A66; text-decoration:none; transition:background 0.12s; }
   .pagination-wrap a:hover { background:#F5F4F0; }
   .pagination-wrap [aria-current="page"] span { background:#1A1916 !important; color:#fff !important; border-color:#1A1916; }
 
@@ -138,7 +94,6 @@
 
 <div class="dash">
 
-  {{-- Header --}}
   <div class="topbar">
     <div>
       <h1>Employer <em>Dashboard</em></h1>
@@ -152,12 +107,10 @@
     </a>
   </div>
 
-  {{-- Flash --}}
   @if(session('success'))
     <div class="alert-success">{{ session('success') }}</div>
   @endif
 
-  {{-- Stats --}}
   <div class="stats-row">
     <div class="stat-card">
       <div class="s-label">Active listings</div>
@@ -183,7 +136,6 @@
     </div>
   </div>
 
-  {{-- Section header + filters --}}
   <div class="section-header">
     <span class="section-label">Your listings</span>
     <div class="filter-row">
@@ -196,7 +148,6 @@
     </div>
   </div>
 
-  {{-- Job cards --}}
   <div class="job-list">
     @forelse($jobs as $job)
       @php
@@ -210,7 +161,8 @@
           'internship' => 'badge-internship',
           default      => 'badge-fulltime',
         };
-        $barPct = $job->applications_count > 0 ? min(100, round(($job->applications_count/20)*100)) : 0;
+        $barPct    = $job->applications_count > 0 ? min(100, round(($job->applications_count/20)*100)) : 0;
+        $avgRating = $job->feedbacks()->avg('rating');
       @endphp
 
       <div class="job-card {{ $job->status==='closed' ? 'closed' : '' }}">
@@ -238,6 +190,15 @@
               </svg>
               {{ $past ? 'Expired' : 'Closes' }} {{ $job->deadline->format('M d, Y') }}
             </span>
+            @if($avgRating)
+              <span class="meta-sep"></span>
+              <span class="meta-item">
+                <svg width="12" height="12" viewBox="0 0 20 20" fill="#1A1916" stroke="#1A1916" stroke-width="1">
+                  <path d="M10 1l2.39 4.84 5.34.78-3.86 3.76.91 5.32L10 13.27l-4.78 2.51.91-5.32L2.27 6.62l5.34-.78L10 1z"/>
+                </svg>
+                {{ number_format($avgRating, 1) }} avg rating
+              </span>
+            @endif
           </div>
 
           <div class="job-footer">
@@ -250,7 +211,6 @@
         </div>
 
         <div class="job-actions">
-          {{-- View applicants --}}
           <a href="{{ route('jobs.applications', $job) }}" class="btn-applicants">
             <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
               <circle cx="4.5" cy="3.5" r="2" stroke="currentColor" stroke-width="1.2"/>
@@ -265,16 +225,18 @@
             @endif
           </a>
 
-          {{-- Edit --}}
+          <a href="{{ route('feedback.index', $job) }}" class="btn-feedback">
+            <svg width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4">
+              <path d="M10 1l2.39 4.84 5.34.78-3.86 3.76.91 5.32L10 13.27l-4.78 2.51.91-5.32L2.27 6.62l5.34-.78L10 1z"/>
+            </svg>
+            Feedback
+          </a>
+
           <a href="{{ route('jobs.edit', $job) }}" class="btn-edit">Edit</a>
 
-          {{-- Delete --}}
           <form method="POST" action="{{ route('jobs.destroy', $job) }}">
             @csrf @method('DELETE')
-            <button type="submit" class="btn-delete"
-                    onclick="return confirm('Delete this listing?')">
-              Delete
-            </button>
+            <button type="submit" class="btn-delete" onclick="return confirm('Delete this listing?')">Delete</button>
           </form>
         </div>
       </div>
@@ -297,7 +259,6 @@
     @endforelse
   </div>
 
-  {{-- Pagination --}}
   @if($jobs->hasPages())
     <div class="pagination-wrap">
       {{ $jobs->appends(request()->query())->links() }}
