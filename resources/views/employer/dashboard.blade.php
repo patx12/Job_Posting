@@ -59,8 +59,6 @@
   .btn-applicants:hover { opacity:0.82; color:#fff; }
   .btn-edit { font-size:12px; font-weight:500; font-family:'DM Sans',sans-serif; padding:7px 14px; border-radius:8px; cursor:pointer; border:0.5px solid rgba(26,25,22,0.18); background:transparent; color:#6B6A66; text-decoration:none; transition:background 0.12s,color 0.12s; }
   .btn-edit:hover { background:#F5F4F0; color:#1A1916; }
-  .btn-feedback { font-size:12px; font-weight:500; font-family:'DM Sans',sans-serif; padding:7px 14px; border-radius:8px; cursor:pointer; border:0.5px solid rgba(26,25,22,0.18); background:transparent; color:#6B6A66; text-decoration:none; transition:background 0.12s,color 0.12s; display:inline-flex; align-items:center; gap:5px; }
-  .btn-feedback:hover { background:#F5F4F0; color:#1A1916; }
   .btn-delete { font-size:12px; font-family:'DM Sans',sans-serif; padding:5px 10px; border-radius:8px; cursor:pointer; border:none; background:transparent; color:#C4C2BC; transition:background 0.12s,color 0.12s; }
   .btn-delete:hover { background:#FCEBEB; color:#A32D2D; }
 
@@ -161,8 +159,7 @@
           'internship' => 'badge-internship',
           default      => 'badge-fulltime',
         };
-        $barPct    = $job->applications_count > 0 ? min(100, round(($job->applications_count/20)*100)) : 0;
-        $avgRating = $job->feedbacks()->avg('rating');
+        $barPct = $job->applications_count > 0 ? min(100, round(($job->applications_count/20)*100)) : 0;
       @endphp
 
       <div class="job-card {{ $job->status==='closed' ? 'closed' : '' }}">
@@ -190,15 +187,6 @@
               </svg>
               {{ $past ? 'Expired' : 'Closes' }} {{ $job->deadline->format('M d, Y') }}
             </span>
-            @if($avgRating)
-              <span class="meta-sep"></span>
-              <span class="meta-item">
-                <svg width="12" height="12" viewBox="0 0 20 20" fill="#1A1916" stroke="#1A1916" stroke-width="1">
-                  <path d="M10 1l2.39 4.84 5.34.78-3.86 3.76.91 5.32L10 13.27l-4.78 2.51.91-5.32L2.27 6.62l5.34-.78L10 1z"/>
-                </svg>
-                {{ number_format($avgRating, 1) }} avg rating
-              </span>
-            @endif
           </div>
 
           <div class="job-footer">
@@ -223,13 +211,6 @@
                 {{ $job->applications_count }}
               </span>
             @endif
-          </a>
-
-          <a href="{{ route('feedback.index', $job) }}" class="btn-feedback">
-            <svg width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4">
-              <path d="M10 1l2.39 4.84 5.34.78-3.86 3.76.91 5.32L10 13.27l-4.78 2.51.91-5.32L2.27 6.62l5.34-.78L10 1z"/>
-            </svg>
-            Feedback
           </a>
 
           <a href="{{ route('jobs.edit', $job) }}" class="btn-edit">Edit</a>
