@@ -43,13 +43,13 @@ Route::middleware(['auth', 'role:employer,admin'])->group(function () {
     Route::delete('/jobs/{jobListing}',                [JobListingController::class, 'destroy'])->name('jobs.destroy');
     Route::get('/jobs/{jobListing}/applications',      [JobListingController::class, 'applications'])->name('jobs.applications');
     Route::patch('/applications/{application}/status', [ApplicationController::class, 'updateStatus'])->name('applications.status');
-
+}); // ← was missing
 
 // Jobseeker
 Route::middleware(['auth', 'role:jobseeker'])->group(function () {
     Route::get('/jobseeker/dashboard',             [DashboardController::class, 'jobseeker'])->name('jobseeker.dashboard');
     Route::post('/jobs/{jobListing}/apply',        [ApplicationController::class, 'store'])->name('applications.store');
-
+}); // ← was missing
 
 // Wildcard MUST come after all static /jobs/* routes
 Route::get('/jobs/{jobListing}', [JobListingController::class, 'show'])->name('jobs.show');
