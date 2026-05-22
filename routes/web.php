@@ -6,7 +6,6 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminRegisterController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\FeedbackController;
 use Illuminate\Support\Facades\Route;
 
 // Public
@@ -45,18 +44,12 @@ Route::middleware(['auth', 'role:employer,admin'])->group(function () {
     Route::get('/jobs/{jobListing}/applications',      [JobListingController::class, 'applications'])->name('jobs.applications');
     Route::patch('/applications/{application}/status', [ApplicationController::class, 'updateStatus'])->name('applications.status');
 
-    // Employer view feedback
-    Route::get('/jobs/{jobListing}/feedback',          [FeedbackController::class, 'index'])->name('feedback.index');
-});
 
 // Jobseeker
 Route::middleware(['auth', 'role:jobseeker'])->group(function () {
     Route::get('/jobseeker/dashboard',             [DashboardController::class, 'jobseeker'])->name('jobseeker.dashboard');
     Route::post('/jobs/{jobListing}/apply',        [ApplicationController::class, 'store'])->name('applications.store');
 
-    // Jobseeker leave feedback
-    Route::post('/jobs/{jobListing}/feedback',     [FeedbackController::class, 'store'])->name('feedback.store');
-});
 
 // Wildcard MUST come after all static /jobs/* routes
 Route::get('/jobs/{jobListing}', [JobListingController::class, 'show'])->name('jobs.show');
